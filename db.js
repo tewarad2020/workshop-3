@@ -1,10 +1,17 @@
-// getting-started.js
-const mongoose = require('mongoose')
-
-main().catch((err) => console.log(err))
+// db.js
+const mongoose = require('mongoose');
+require('dotenv').config();
 
 async function main() {
-    console.log(process.env.DB_HOST)
-    await mongoose.connect(`mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`);
-    console.log("Connect DB Success.");
+  try {
+    await mongoose.connect(process.env.MONGODB_ATLAS_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("✅ Connected to MongoDB Atlas");
+  } catch (err) {
+    console.error("❌ MongoDB connection error:", err);
+  }
 }
+
+main();
