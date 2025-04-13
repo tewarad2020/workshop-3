@@ -26,21 +26,24 @@
           lastName: '',
           username: '',
           password: '',
-          role: ''
+          role: 'user'
         },
-        roles: ['ผู้ใช้ทั่วไป','ร้านค้า']
+        roles: ['user']
       };
     },
     methods: {
       register() {
-        // โค้ดสำหรับส่งข้อมูลไปยังเซิร์ฟเวอร์
-        console.log(this.formData);
-        // ...
+        this.axios.post(`${process.env.VUE_APP_API_URL}/register`, this.formData)
+          .then(res => {
+            alert('ลงทะเบียนสำเร็จ');
+            this.$router.push('/login');
+          })
+          .catch(error => {
+            alert(`ลงทะเบียนล้มเหลว, ข้อความผิดพลาด: ${error.response.data.message}`);
+          });
       },
       cancel() {
-        // โค้ดสำหรับยกเลิกการลงทะเบียน
-        console.log('ยกเลิกการลงทะเบียน');
-        // ...
+        this.$router.push('/login');
       }
     }
   };

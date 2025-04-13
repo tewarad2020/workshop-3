@@ -34,10 +34,15 @@ const routes = [
   {
     path: '/',
     name: 'toolbar',
-    component: () => import('../views/ToolbarView.vue'),
+    component: () => import('../views/LayoutView.vue'),
     children: [
       {
         path: '/',
+        name: 'home',
+        component: HomeView
+      },
+      {
+        path: '/home',
         name: 'home',
         component: HomeView
       },
@@ -48,6 +53,16 @@ const routes = [
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
         component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+      },
+      {
+        path: '/shop',
+        name: 'shop',
+        component: () => import('../views/ShopView.vue')
+      },
+      {
+        path: '/cart',
+        name: 'cart',
+        component: () => import('../views/CartView.vue')
       },
     ]
   }
